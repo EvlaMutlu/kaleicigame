@@ -1,0 +1,92 @@
+{
+ "_durum": "TASLAK - araştırmacı onayı bekliyor",
+ "questions": {
+  "hadrian": {
+   "kolay": {
+    "text": "Hadrian Kapısı kaç girişlidir?",
+    "options": [
+     "3",
+     "1",
+     "5"
+    ],
+    "answer": 0
+   },
+   "orta": {
+    "text": "Kapı hangi Roma imparatorunun anısına yapılmıştır?",
+    "options": [
+     "Augustus",
+     "Hadrianus",
+     "Neron"
+    ],
+    "answer": 1
+   },
+   "zor": {
+    "text": "Kapıdaki mermer sütunların başlıkları hangi düzendedir?",
+    "options": [
+     "Dor",
+     "Toskan",
+     "Kompozit (İyon ve Korint karışımı)"
+    ],
+    "answer": 2
+   }
+  },
+  "hidirlik": {
+   "kolay": {
+    "text": "Hıdırlık Kulesi'nin kaidesi hangi biçimdedir?",
+    "options": [
+     "Kare",
+     "Altıgen",
+     "Üçgen"
+    ],
+    "answer": 0
+   },
+   "orta": {
+    "text": "Kulenin gövdesi hangi biçimdedir?",
+    "options": [
+     "Sekizgen",
+     "Silindir",
+     "Kare"
+    ],
+    "answer": 1
+   },
+   "zor": {
+    "text": "Rehberde aktarılana göre 1846'da kulede ne bulunmuştur?",
+    "options": [
+     "Bir kütüphane",
+     "Eski devirlere ait silah ve savaş malzemeleri deposu",
+     "Bir sarnıç"
+    ],
+    "answer": 1
+   }
+  },
+  "dumlupinar": {
+   "kolay": {
+    "text": "Dumlupınar Ortaokulu binası ilk olarak ne amaçla yapılmıştır?",
+    "options": [
+     "Rum Kız Mektebi",
+     "Belediye binası",
+     "Karakol"
+    ],
+    "answer": 0
+   },
+   "orta": {
+    "text": "Birinci Dünya Savaşı sırasında bina ne olarak kullanılmıştır?",
+    "options": [
+     "Kışla",
+     "Hastane",
+     "Depo"
+    ],
+    "answer": 1
+   },
+   "zor": {
+    "text": "Bina hangi yıl yapılmıştır?",
+    "options": [
+     "1876",
+     "1923",
+     "1905"
+    ],
+    "answer": 2
+   }
+  }
+ }
+}
