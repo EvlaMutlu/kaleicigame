@@ -315,14 +315,13 @@ function suggestedNext() {
 function tour() {
   if (map) { map.remove(); map = null; }
   const all = tourStops(), done = st.visited.filter(id => all.some(s => s.id === id)).length;
-  const pct = all.length ? Math.round(100 * done / all.length) : 0;
-  const isA = st.group === 'A';
+    const isA = st.group === 'A';
   if (!st.target || st.visited.includes(st.target) || !all.some(s => s.id === st.target)) st.target = suggestedNext()?.id || null;
   const head = `
     <p class="eyebrow">${isA ? 'Duraklar' : 'Rotan'}</p>
     <div class="title-row"><h2 class="q-title">${unvisited().length ? 'Bir hedef seç' : 'Rotanı tamamladın 🎉'}</h2>
-      <div class="gauge" style="--p:${pct}"><span>%${pct}</span></div></div>
-    <p class="hint">${isA ? `${done} durak gezdin` : `Rotanın %${pct}'ini tamamladın · ${done}/${all.length} durak`}</p>
+      <div class="count-badge"><b>${done}</b><small>durak</small></div></div>
+    <p class="hint">${done ? `${done} durak gezdin. Keyifli keşifler!` : 'Keyifli keşifler!'}</p>
     <div id="gpsnote" class="note" hidden></div>`;
   if (st.view === 'map') {
     const t = st.target ? STOP[st.target] : null;

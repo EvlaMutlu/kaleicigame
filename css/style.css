@@ -212,3 +212,6 @@ details.add li, .stoplist li { display: flex; justify-content: space-between; al
 .ph-avatar > span img { width: 100%; height: 100%; object-fit: cover; }
 .ph-avatar > span svg { width: 48px; height: 48px; }
 .ph-avatar > div { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+
+.count-badge { flex: none; width: 64px; height: 64px; border-radius: 50%; background: var(--card); color: var(--card-dark); display: grid; place-content: center; text-align: center; line-height: 1; }
+.count-badge b { font-size: 1.5rem; } .count-badge small { font-size: .7rem; font-weight: 600; }
