@@ -70,24 +70,57 @@ function wireShell() {
 const inG = k => (CONFIG[k] || []).includes(st.group);
 const hasQ = () => inG('QUESTION_GROUPS');
 const avatarOn = () => inG('AVATAR_GROUPS') && !!st.code;
-const myAvatar = () => (avatarOn() ? avatarById(st.avatar) : null);
+const avMode = () => CONFIG.AVATAR_MODE?.[st.group] || 'character';
+const myAvatar = () => {
+  if (!avatarOn()) return null;
+  if (avMode() === 'photo') return st.photoAvatar ? { svg: `<img class="av-photo" src="${st.photoAvatar}" alt="">` } : null;
+  return avatarById(st.avatar);
+};
 function profileSheet() {
-  let pick = st.avatar || '';
+  const photo = avMode() === 'photo';
+  let pick = st.avatar || '', ph = st.photoAvatar || '';
   modal(`<p class="eyebrow">Profilim</p><h2 class="q-title">Kâşif kimliğin</h2>
     <label class="small muted" for="nick">Takma ad</label>
-    <input id="nick" class="input" maxlength="20" autocomplete="off" placeholder="ör. Kale Kartalı" value="${esc(st.nick || '')}">
+    <input id="nick" class="input plain" maxlength="20" autocomplete="off" placeholder="ör. Kale Kartalı" value="${esc(st.nick || '')}">
     <p class="muted small">Lütfen gerçek adınızı yazmayın. Takma ad yalnızca bu telefonda saklanır.</p>
+    ${photo ? `
+    <p class="small muted">Profil fotoğrafın</p>
+    <div class="ph-avatar"><span id="phPrev">${ph ? `<img src="${ph}" alt="">` : ICON.user}</span>
+      <div><label class="btn ghost file-btn">${ICON.camera} Fotoğraf çek / seç<input id="phFile" type="file" accept="image/*" hidden></label>
+      <button id="phDel" class="btn ghost small" ${ph ? '' : 'hidden'}>Fotoğrafı kaldır</button></div></div>
+    <p class="muted small">Fotoğrafın yalnızca bu telefonda kalır; araştırma ekibine gönderilmez.</p>` : `
     <p class="small muted">Avatarını seç</p>
     <div class="av-grid">${AVATARS.map(a => `<button class="av ${a.id === pick ? 'on' : ''}" data-av="${a.id}" aria-label="${esc(a.name)}">${a.svg}<span>${esc(a.name)}</span></button>`).join('')}</div>
-    <p class="muted small">Avatarlar, Kaleiçi'nin tarihinde adı geçen kişilerden esinlenen temsilî çizimlerdir.</p>
+    <p class="muted small">Avatarlar, Kaleiçi'nin tarihinde adı geçen kişilerden esinlenen temsilî çizimlerdir.</p>`}
     <button id="pSave" class="btn primary">Kaydet</button>
     <p class="muted small center">Katılımcı kodu: ${esc(st.code)}</p>`);
   $$('[data-av]').forEach(b => b.onclick = () => { pick = b.dataset.av; $$('[data-av]').forEach(x => x.classList.toggle('on', x === b)); });
+  if (photo) {
+    const draw = () => { $('#phPrev').innerHTML = ph ? `<img src="${ph}" alt="">` : ICON.user; $('#phDel').hidden = !ph; };
+    $('#phFile').onchange = async e => { const f = e.target.files[0]; if (f) { try { ph = await squareImage(f); } catch { } } e.target.value = ''; draw(); };
+    $('#phDel').onclick = () => { ph = ''; draw(); };
+  }
   $('#pSave').onclick = () => {
     const nick = $('#nick').value.trim().slice(0, 20);
-    if (pick !== st.avatar || nick !== (st.nick || '')) log('profil_guncellendi', '', { avatar: pick, takma_ad: !!nick });
-    st.avatar = pick; st.nick = nick; save(); closeModal(true); render();
+    const changed = nick !== (st.nick || '') || (photo ? ph !== (st.photoAvatar || '') : pick !== st.avatar);
+    if (changed) log('profil_guncellendi', '', photo ? { avatar: ph ? 'kendi_fotografi' : '', takma_ad: !!nick } : { avatar: pick, takma_ad: !!nick });
+    if (photo) st.photoAvatar = ph; else st.avatar = pick;
+    st.nick = nick; save(); closeModal(true); render();
   };
+}
+// Profil fotoğrafı: ortadan kare kırp, 256 px JPEG (yalnızca telefonda saklanır)
+function squareImage(file, size = 256) {
+  return new Promise((res, rej) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const s = Math.min(img.width, img.height);
+      const cv = Object.assign(document.createElement('canvas'), { width: size, height: size });
+      cv.getContext('2d').drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, size, size);
+      URL.revokeObjectURL(url); res(cv.toDataURL('image/jpeg', 0.85));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); rej(); };
+    img.src = url;
+  });
 }
 
 function openMenu() {

@@ -60,7 +60,7 @@ Her olay "Olaylar" sayfasına bir satır olarak düşer: zaman, kod, grup, olay,
 | `cevap` | her cevap denemesi (C) | seviye, seçenek, doğru mu, kaçıncı deneme, saniye |
 | `soru_zorlugu_degisti` | (C) | eski, yeni, nereden değiştirildi |
 | `rozet`, `rozetler_acildi` | (C) | rozet adı |
-| `profil_guncellendi` | B, C | seçilen avatar; takma ad girildi mi (ad kaydedilmez) |
+| `profil_guncellendi` | B, C | seçilen avatar (B'de yalnızca "kendi_fotografi" bilgisi, fotoğraf gönderilmez); takma ad girildi mi (ad kaydedilmez) |
 | `yer_onerildi` | B, C | öneri kimliği, yer adı, kategori, fotoğraf sayısı, konumun nasıl alındığı. Önerinin kendisi (bilgi + fotoğraflar) E-Tablodaki **Öneriler** sayfasına, fotoğraflar Drive'da "Kaleiçi Kaşifi – Öneri Fotoğrafları" klasörüne gider. |
 | `motivasyon`, `gunluk_acildi` | C | gösterilen motivasyon mesajının türü (hafta_artti, cok_aktif, pasif, hafta_azaldi, baslangic, devam); günlük açıldığında bugün / son 7 gün / geçen hafta / toplam |
 | `durak_listesi_acildi`, `durak_secildi` | (A) | |
@@ -114,7 +114,8 @@ Hangi özelliğin hangi grupta açık olduğu `js/config.js` içindeki `QUESTION
 |---|:-:|:-:|:-:|
 | Tercih soruları, kişisel rota, benzerlik % | – | ✓ | ✓ |
 | Durak soruları + soru zorluğu seçimi | – | – | ✓ |
-| Profil: takma ad + avatar | – | ✓ | ✓ |
+| Takma ad | – | ✓ | ✓ |
+| Avatar | – | kendi fotoğrafı (telefonda kalır) | tarihî karakterlerden seçim |
 | Haritaya yeni yer öner | – | ✓ | ✓ |
 | Rozetler + rozet önerisi | – | – | ✓ |
 | Ziyaret günlüğü + motivasyon mesajları | – | – | ✓ |
