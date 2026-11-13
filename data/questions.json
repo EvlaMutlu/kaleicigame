@@ -9,25 +9,60 @@
      "1",
      "5"
     ],
-    "answer": 0
+    "answer": 0,
+    "source": "Valilik Kültür Envanteri: \"3 girişli anıtsal bir kapı\" (Üçkapılar)."
    },
    "orta": {
-    "text": "Kapı hangi Roma imparatorunun anısına yapılmıştır?",
+    "text": "Kapı hangi Roma imparatorunun Anadolu ziyareti anısına yapılmıştır?",
     "options": [
-     "Augustus",
      "Hadrianus",
+     "Augustus",
      "Neron"
     ],
-    "answer": 1
+    "answer": 0,
+    "source": "Valilik Kültür Envanteri: imparator Hadrianus anısına, M.S. 130."
    },
    "zor": {
-    "text": "Kapıdaki mermer sütunların başlıkları hangi düzendedir?",
+    "text": "Kapının kuzeyindeki burçta hangi Selçuklu sultanı dönemine ait bir kitabe vardır?",
     "options": [
-     "Dor",
-     "Toskan",
-     "Kompozit (İyon ve Korint karışımı)"
+     "Alaaddin Keykubat",
+     "II. Kılıçarslan",
+     "Gıyaseddin Keyhüsrev"
     ],
-    "answer": 2
+    "answer": 0,
+    "source": "Valilik: kuzeydeki burç hicri 617 (1220) tarihli Alaaddin Keykubat dönemi kitabesi taşır."
+   }
+  },
+  "yat-limani": {
+   "kolay": {
+    "text": "Attaleia kurulmadan önce Yat Limanı'nda hangi adla bir korsan limanı bulunuyordu?",
+    "options": [
+     "Korykos",
+     "Olbia",
+     "Phaselis"
+    ],
+    "answer": 0,
+    "source": "Antalya Valiliği: \"Korykos adı ile bir korsan limanı\"."
+   },
+   "orta": {
+    "text": "\"Korykos\" adı ne anlama gelir?",
+    "options": [
+     "Kaya Kovuğu",
+     "Mavi Koy",
+     "Rüzgârlı Liman"
+    ],
+    "answer": 0,
+    "source": "Antalya Valiliği: \"Kaya Kovuğu anlamına da gelen Korykos\"."
+   },
+   "zor": {
+    "text": "Boran Eser Kavaz'ın anlatımına göre Kırmızı Fener'in olduğu yerde eskiden ne vardı?",
+    "options": [
+     "Bir gümrük binası",
+     "Bir balık hâli",
+     "Bir tersane"
+    ],
+    "answer": 0,
+    "source": "20 Mayıs 2023 tur notları (Boran Eser Kavaz)."
    }
   },
   "hidirlik": {
@@ -38,25 +73,548 @@
      "Altıgen",
      "Üçgen"
     ],
-    "answer": 0
+    "answer": 0,
+    "source": "Kaidesi kare yapıda, gövdesi silindir şeklindedir."
    },
    "orta": {
     "text": "Kulenin gövdesi hangi biçimdedir?",
     "options": [
-     "Sekizgen",
      "Silindir",
+     "Sekizgen",
      "Kare"
     ],
-    "answer": 1
+    "answer": 0,
+    "source": "Kaidesi kare yapıda, gövdesi silindir şeklindedir."
    },
    "zor": {
-    "text": "Rehberde aktarılana göre 1846'da kulede ne bulunmuştur?",
+    "text": "Süleyman Fikri'ye göre 1846'daki aramada kulede ne bulunmuştur?",
     "options": [
-     "Bir kütüphane",
      "Eski devirlere ait silah ve savaş malzemeleri deposu",
+     "Bir kütüphane",
      "Bir sarnıç"
     ],
-    "answer": 1
+    "answer": 0,
+    "source": "Süleyman Fikri, Antalya Livası Tarihi."
+   }
+  },
+  "sehzade-korkut": {
+   "kolay": {
+    "text": "Yapının güney nefindeki sütun başlıkları hangi döneme aittir?",
+    "options": [
+     "Bizans",
+     "Osmanlı",
+     "Selçuklu"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"Güney nefteki Bizans sütunu başlıkları\" (fotoğraf açıklaması)."
+   },
+   "orta": {
+    "text": "Süleyman Fikri'ye göre yapı hangi yıl yangın geçirmiştir?",
+    "options": [
+     "1898",
+     "1844",
+     "1923"
+    ],
+    "answer": 0,
+    "source": "\"1898 yılında gördüğü yangın sebebiyle hasar görmüş\"."
+   },
+   "zor": {
+    "text": "Hüseyin Çimrin'e göre 1974 kazılarında hangi yapıya ait parçalar bulunmuştur?",
+    "options": [
+     "Roma agorası",
+     "Roma tiyatrosu",
+     "Bizans sarayı"
+    ],
+    "answer": 0,
+    "source": "\"1974 yılında yapılan kazı… Roma Agorası'na ait parçalar\"."
+   }
+  },
+  "yivli-minare": {
+   "kolay": {
+    "text": "Rivayete göre Sultan Alaaddin Keykubat minareyi hangi mimara yaptırmıştır?",
+    "options": [
+     "Balaban",
+     "Tuğrul",
+     "Sinan"
+    ],
+    "answer": 0,
+    "source": "Rehberdeki rivayet (Mimar Balaban); Tuğrul, Mevlevihane'nin mimarı."
+   },
+   "orta": {
+    "text": "Minarenin gövdesinde kaç yiv vardır?",
+    "options": [
+     "8",
+     "6",
+     "12"
+    ],
+    "answer": 0,
+    "source": "Rivayet: \"8 yivi ile… Firuze sırlı tuğlalarla\"."
+   },
+   "zor": {
+    "text": "Kasım 1933'te Yivli Minare'yi şerefesinden itibaren yıkan olay neydi?",
+    "options": [
+     "Bir deprem",
+     "Bir yangın",
+     "Bir yıldırım düşmesi"
+    ],
+    "answer": 0,
+    "source": "Çimrin: Kasım 1933, 6.2 şiddetinde deprem."
+   }
+  },
+  "oyuncak-muzesi": {
+   "kolay": {
+    "text": "Oyuncak Müzesi'nin kuruluşuna kim öncülük etmiştir?",
+    "options": [
+     "Sunay Akın",
+     "Ayhan Doğan",
+     "Murat Fıçıcı"
+    ],
+    "answer": 0,
+    "source": "\"Sunay Akın'ın kuruluşuna öncülük ettiği\"; Ayhan Doğan dekorasyonu yapmış."
+   },
+   "orta": {
+    "text": "Müze hangi tarihte açılmıştır?",
+    "options": [
+     "23 Nisan 2011",
+     "29 Ekim 2003",
+     "19 Mayıs 2015"
+    ],
+    "answer": 0,
+    "source": "\"23 Nisan 2011 yılında kullanıma açılmıştır\"."
+   },
+   "zor": {
+    "text": "Müzedeki antika oyuncaklar hangi yıllar arasından kalmadır?",
+    "options": [
+     "1860'lardan 1980'lere",
+     "1920'lerden 2000'lere",
+     "1700'lerden 1850'lere"
+    ],
+    "answer": 0,
+    "source": "\"1860'lardan 1980'lere dek antika değeri taşıyan 3 bine yakın oyuncak\"."
+   }
+  },
+  "seraser": {
+   "kolay": {
+    "text": "Seraser Restoran kendisini kaç yıllık bir konakta tanıtıyor?",
+    "options": [
+     "300 yıllık",
+     "50 yıllık",
+     "1000 yıllık"
+    ],
+    "answer": 0,
+    "source": "Restoranın tanıtım metni (rehberde alıntı)."
+   },
+   "orta": {
+    "text": "Seraser mutfağını nasıl tanımlıyor?",
+    "options": [
+     "Dünya mutfağını geleneksel motiflerle harmanlayan",
+     "Yalnızca deniz ürünleri sunan",
+     "Sokak lezzetleri sunan"
+    ],
+    "answer": 0,
+    "source": "Restoranın tanıtım metni (rehberde alıntı)."
+   }
+  },
+  "holly-stone": {
+   "kolay": {
+    "text": "Holly Stone nasıl bir mekândır?",
+    "options": [
+     "Canlı müzik konseptli bir eğlence mekânı",
+     "Bir müze",
+     "Bir hamam"
+    ],
+    "answer": 0,
+    "source": "Rehber: canlı müzik konseptli eğlence mekânı."
+   },
+   "orta": {
+    "text": "Holly Stone'un toplam kaç ilde şubesi vardır?",
+    "options": [
+     "7",
+     "2",
+     "15"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"toplamda 7 ilde şubesi bulunan\"."
+   }
+  },
+  "kaleici-meyhanesi": {
+   "kolay": {
+    "text": "Kaleiçi Meyhanesi ağırlıkla nerede servis verir?",
+    "options": [
+     "Bahçe alanında",
+     "Teras katında",
+     "Bir teknede"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"ağırlıkla bahçe alanında servis veren\"."
+   }
+  },
+  "copluk": {
+   "kolay": {
+    "text": "Çöplük nasıl bir mekândır?",
+    "options": [
+     "Canlı müzikli bir eğlence mekânı",
+     "Bir sanat galerisi",
+     "Bir kahvaltı salonu"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"canlı müzikli, eğlence mekânıdır\"."
+   }
+  },
+  "balikci-meyhanesi": {
+   "kolay": {
+    "text": "Balıkçı Meyhanesi'nin konsepti nedir?",
+    "options": [
+     "Balık ve meze",
+     "Kahvaltı",
+     "Pastane"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"balık-alkol-meze konseptli meyhane\"."
+   },
+   "orta": {
+    "text": "Balıkçı Meyhanesi hangi yapıların karşısındadır?",
+    "options": [
+     "Olgunlaştırma Enstitüsü ve Safa Hamamı",
+     "Saat Kulesi ve Yivli Minare",
+     "Hadrian Kapısı ve AKMED"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"Antalya Olgunlaştırma Enstitüsü ve Safa Hamamı'nın karşısında\"."
+   }
+  },
+  "kaleici-buda": {
+   "kolay": {
+    "text": "Kaleiçi Buda gün içinde nasıl işletilir?",
+    "options": [
+     "Gündüz kafe, akşam bar",
+     "Gündüz müze, akşam restoran",
+     "Yalnızca kahvaltı salonu"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"gündüz cafe ve akşam da bar olarak işletilen\"."
+   }
+  },
+  "varuna": {
+   "kolay": {
+    "text": "Varuna Gezgin'in kurucusu Murat Fıçıcı hangi mesleği yapıyordu?",
+    "options": [
+     "Matematik öğretmeni",
+     "Aşçı",
+     "Mimar"
+    ],
+    "answer": 0,
+    "source": "Varuna resmi web sitesi metni."
+   },
+   "orta": {
+    "text": "Murat Fıçıcı'nın kafeden elde ettiği gelirle hayali neydi?",
+    "options": [
+     "Gençlerin dünyayı keşfetmesini sağlamak",
+     "Bir aşçılık okulu açmak",
+     "Bir müze kurmak"
+    ],
+    "answer": 0,
+    "source": "Varuna resmi web sitesi metni."
+   },
+   "zor": {
+    "text": "Murat Fıçıcı kafenin tadilatına hangi yıl başladı?",
+    "options": [
+     "2003",
+     "1995",
+     "2012"
+    ],
+    "answer": 0,
+    "source": "Varuna resmi web sitesi metni: \"2003 yılında… 9.500 TL sermaye ile\"."
+   }
+  },
+  "r22": {
+   "kolay": {
+    "text": "R22 Sanat Evi'nde ağırlıkla hangi tür konserler verilir?",
+    "options": [
+     "Klasik ve caz",
+     "Rock ve pop",
+     "Türk halk müziği"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"ağırlıkla Klasik ve Caz müziği konserleri\"."
+   },
+   "orta": {
+    "text": "R22 Sanat Evi hangi otelin içindedir?",
+    "options": [
+     "Kauçuk Otel",
+     "Alp Paşa Oteli",
+     "Ruin Adalya"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"Kaleiçi Kauçuk Otel'de bulunan sanat evi\"."
+   }
+  },
+  "saat-kulesi": {
+   "kolay": {
+    "text": "Saat Kulesi nasıl bir burcun üzerine yapılmıştır?",
+    "options": [
+     "Beşgen",
+     "Altıgen",
+     "Yuvarlak"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"beşgen bir burç üstüne 19. yy sonunda yapılan\"."
+   },
+   "orta": {
+    "text": "Saat Kulesi hangi yüzyılın sonunda yapılmıştır?",
+    "options": [
+     "19. yüzyıl",
+     "16. yüzyıl",
+     "13. yüzyıl"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"beşgen bir burç üstüne 19. yy sonunda\"."
+   },
+   "zor": {
+    "text": "Kültür Envanteri'ne göre Saat Kulesi hangi üç kültürün izini taşır?",
+    "options": [
+     "Roma, Selçuklu ve Osmanlı",
+     "Hitit, Frig ve Lidya",
+     "Bizans, Ceneviz ve Venedik"
+    ],
+    "answer": 0,
+    "source": "Valilik Kültür Envanteri: \"Roma, Selçuklu ve Osmanlı olmak üzere üç kültürü\"."
+   }
+  },
+  "tekeli": {
+   "kolay": {
+    "text": "Tekeli Mehmet Paşa Camii'nin kubbe düzeni nasıldır?",
+    "options": [
+     "Merkezde büyük bir kubbe, kuzeyinde üç küçük kubbe",
+     "Birbirine eşit altı kubbe",
+     "Tek bir ahşap çatı"
+    ],
+    "answer": 0,
+    "source": "Valilik (2003): merkezi büyük kubbe ve kuzeyinde üç küçük kubbe."
+   },
+   "orta": {
+    "text": "Caminin içinde ve dışında toplam kaç çini pano vardır?",
+    "options": [
+     "10",
+     "4",
+     "24"
+    ],
+    "answer": 0,
+    "source": "Yılmaz ve Tuzcu: 10 çini panoda 40 beyitlik kasideden beyitler."
+   },
+   "zor": {
+    "text": "Yılmaz ve Tuzcu'ya göre cami hangi yıllar arasında inşa edilmiştir?",
+    "options": [
+     "1606–1616",
+     "1373–1377",
+     "1903–1904"
+    ],
+    "answer": 0,
+    "source": "Yılmaz ve Tuzcu (s.224)."
+   }
+  },
+  "ahi-yusuf": {
+   "kolay": {
+    "text": "Ahi Yusuf Türbesi kaç katlıdır?",
+    "options": [
+     "2",
+     "1",
+     "3"
+    ],
+    "answer": 0,
+    "source": "Turfan 1955: alt katta mezar, üst katta zaviye."
+   },
+   "orta": {
+    "text": "Türbenin üst katı ne olarak yapılmıştır?",
+    "options": [
+     "Zaviye",
+     "Kütüphane",
+     "Hamam"
+    ],
+    "answer": 0,
+    "source": "Turfan 1955: \"alt katta mezar, üst kat da zaviye\"."
+   },
+   "zor": {
+    "text": "Leyla Yılmaz'a göre yapı ilk olarak ne olarak inşa edilmiştir?",
+    "options": [
+     "Bir burç",
+     "Bir kilise",
+     "Bir han"
+    ],
+    "answer": 0,
+    "source": "Leyla Yılmaz: Selçuklu devrinde burç olarak inşa edilip 15. yy'da camiye dönüştürülmüş."
+   }
+  },
+  "mevlevihane": {
+   "kolay": {
+    "text": "Bina 2018'de tamamlanan restorasyondan sonra ne olarak düzenlenmiştir?",
+    "options": [
+     "Mevlevihane Müzesi",
+     "Bir otel",
+     "Bir okul"
+    ],
+    "answer": 0,
+    "source": "Rehber: 2018 restorasyonu, Antalya Mevlevihane Müzesi."
+   },
+   "orta": {
+    "text": "Süleyman Fikri Erten'in bahsettiği kitabeye göre binayı hangi mimar yapmıştır?",
+    "options": [
+     "Mimar Tuğrul",
+     "Mimar Balaban",
+     "Mimar Sinan"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"Alaaddin Keykubat (1220-1237) döneminde Mimar Tuğrul\"."
+   },
+   "zor": {
+    "text": "17. yüzyılda burayı görüp Mevlevihane ile hamamın işler durumda olduğunu yazan gezgin kimdir?",
+    "options": [
+     "Evliya Çelebi",
+     "İbn Battuta",
+     "von Lanckoronski"
+    ],
+    "answer": 0,
+    "source": "Valilik: \"17. yüzyılda Evliya Çelebi burayı gördüğünde…\"."
+   }
+  },
+  "etnografya": {
+   "kolay": {
+    "text": "Antalya Etnografya Müzesi kaç konaktan oluşur?",
+    "options": [
+     "2",
+     "1",
+     "4"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"19. yüzyıla tarihlenen iki konaktan oluşan\"."
+   },
+   "orta": {
+    "text": "Müzede Antalya bölgesine özgü hangi halılar sergilenmektedir?",
+    "options": [
+     "Döşemealtı halıları",
+     "Hereke halıları",
+     "Uşak halıları"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"Döşemealtı Halıları, dokuma tezgâhı\"."
+   },
+   "zor": {
+    "text": "Müzedeki Selçuklu çini parçaları, Selçuklu döneminde kışlık saraya dönüştürülen hangi yapıdan gelmiştir?",
+    "options": [
+     "Aspendos Tiyatrosu",
+     "Perge Agorası",
+     "Side Tiyatrosu"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"kışlık saray haline getirilen Aspendos Tiyatrosu'ndan gelen Selçuklu çini kaplama parçaları\"."
+   }
+  },
+  "suna-inan": {
+   "kolay": {
+    "text": "Müzenin bahçesinde hangi kilise bulunmaktadır?",
+    "options": [
+     "Aya Yorgi (Hagios Georgios)",
+     "Aya Nikola",
+     "Aya Sofya"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"Müzenin bahçesinde Aya Yorgi Kilisesi (Hagios Georgios)\"."
+   },
+   "orta": {
+    "text": "Kilisenin kapısındaki kitabe hangi yazıyla yazılmıştır?",
+    "options": [
+     "Karamanlıca",
+     "Latince",
+     "Ermenice"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"Kapı üzerinde yazan Karamanlıca kitabe\"."
+   },
+   "zor": {
+    "text": "Kitabede hangi yıl yazmaktadır?",
+    "options": [
+     "1863",
+     "1903",
+     "1773"
+    ],
+    "answer": 0,
+    "source": "Kitabe: \"Büyük Şehit Hagios Georgios, sene 1863\"."
+   }
+  },
+  "ahi-kizi": {
+   "kolay": {
+    "text": "Sandukadaki yazıta göre türbenin sahibi kimdir?",
+    "options": [
+     "Hamra binti Ömer",
+     "Nigar Hatun",
+     "Fatma Doman"
+    ],
+    "answer": 0,
+    "source": "Yılmaz ve Tuzcu tercümesi: \"Bu türbenin sahibi Hamra binti Ömer\"."
+   },
+   "orta": {
+    "text": "Türbedeki mermer sanduka bugün nerededir?",
+    "options": [
+     "Müzede",
+     "Türbenin içinde",
+     "Yivli Minare Camii'nde"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"Bu sanduka bugün müzede sergilenmektedir\"."
+   },
+   "zor": {
+    "text": "Leyla Yılmaz'a göre bu yapı neyden devşirilmiş olabilir?",
+    "options": [
+     "Selçuklu döneminden kalan bir burçtan",
+     "Bir Roma tapınağından",
+     "Bir Bizans kilisesinden"
+    ],
+    "answer": 0,
+    "source": "Leyla Yılmaz: \"Selçuklu döneminden kalan bir burçtan devşirilmiş olabileceğine\"."
+   }
+  },
+  "olgunlasma": {
+   "kolay": {
+    "text": "Antalya Olgunlaştırma Enstitüsü binasında neler bulunur?",
+    "options": [
+     "Sınıf, kütüphane ve atölyeler",
+     "Yalnızca bir sergi salonu",
+     "Bir hamam ve çeşme"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"içinde sınıf, kütüphane ve atölyelerin bulunduğu bir bina\"."
+   }
+  },
+  "balik-pazari-hamami": {
+   "kolay": {
+    "text": "Balık Pazarı Hamamı'nın üstünde kaç kubbe vardır?",
+    "options": [
+     "Dört küçük ve bir büyük",
+     "Tek büyük kubbe",
+     "Birbirine eşit altı kubbe"
+    ],
+    "answer": 0,
+    "source": "Turfan 1955: \"üstünde dört küçük, bir büyük kubbe\"."
+   },
+   "orta": {
+    "text": "Leyla Yılmaz'a göre hamam en erken hangi yüzyılda inşa edilmiş olabilir?",
+    "options": [
+     "13. yüzyıl",
+     "17. yüzyıl",
+     "19. yüzyıl"
+    ],
+    "answer": 0,
+    "source": "Leyla Yılmaz (2002): \"en erken 13. yy'da inşa edilmiş olabileceği\"."
+   },
+   "zor": {
+    "text": "Hamamın duvarlarında hangi harç kullanılmıştır?",
+    "options": [
+     "Horasan harcı",
+     "Çimento harcı",
+     "Alçı harcı"
+    ],
+    "answer": 0,
+    "source": "Turfan 1955: \"Duvarlarında horasan harcı kullanılmıştır\"."
    }
   },
   "dumlupinar": {
@@ -67,25 +625,124 @@
      "Belediye binası",
      "Karakol"
     ],
-    "answer": 0
+    "answer": 0,
+    "source": "Okul tarihçesi: \"1905 yılında Rum Kız Mektebi olarak yapılmış\"."
    },
    "orta": {
     "text": "Birinci Dünya Savaşı sırasında bina ne olarak kullanılmıştır?",
     "options": [
-     "Kışla",
      "Hastane",
+     "Kışla",
      "Depo"
     ],
-    "answer": 1
+    "answer": 0,
+    "source": "Okul tarihçesi: Dr. Burhanettin Onat tarafından hastane olarak."
    },
    "zor": {
     "text": "Bina hangi yıl yapılmıştır?",
     "options": [
+     "1905",
      "1876",
-     "1923",
-     "1905"
+     "1923"
     ],
-    "answer": 2
+    "answer": 0,
+    "source": "Okul tarihçesi."
+   }
+  },
+  "fatma-doman": {
+   "kolay": {
+    "text": "Fatma Doman Kaleiçi'nde hangi görevi yapmıştır?",
+    "options": [
+     "Fenerin gardiyanlığını",
+     "Okul öğretmenliğini",
+     "Hamam işletmeciliğini"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"fenerin gardiyanlık yapan Fatma Doman\"."
+   },
+   "orta": {
+    "text": "Fatma Doman bu görevi hangi yıllar arasında yapmıştır?",
+    "options": [
+     "1955–1983",
+     "1905–1929",
+     "1983–2021"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"1955-1983 yılları arasında\"."
+   },
+   "zor": {
+    "text": "Fatma Doman'ın heykeli hangi bayramda açılmıştır?",
+    "options": [
+     "Denizcilik ve Kabotaj Bayramı",
+     "Cumhuriyet Bayramı",
+     "Ulusal Egemenlik ve Çocuk Bayramı"
+    ],
+    "answer": 0,
+    "source": "Rehber: \"1 Temmuz 2021 Denizcilik ve Kabotaj Bayramı'nda\"."
+   }
+  },
+  "iskele-camii": {
+   "kolay": {
+    "text": "İskele Camii'nin mihrabı hangi üsluptadır?",
+    "options": [
+     "Gotik",
+     "Barok",
+     "Selçuklu"
+    ],
+    "answer": 0,
+    "source": "Çimrin: \"mihrabı Gotik üslubunda\"."
+   },
+   "orta": {
+    "text": "İskele Camii'nde aşağıdakilerden hangisi bulunmaz?",
+    "options": [
+     "Minber",
+     "Mihrap",
+     "Kitabe"
+    ],
+    "answer": 0,
+    "source": "Çimrin: \"minberi bulunmayan bir camidir\"."
+   },
+   "zor": {
+    "text": "İskele Camii hangi yıl inşa edilmiştir?",
+    "options": [
+     "1903",
+     "1373",
+     "1606"
+    ],
+    "answer": 0,
+    "source": "Çimrin: \"5 Eylül 1903'te inşa edilmiş\"."
+   }
+  },
+  "zincirkiran": {
+   "kolay": {
+    "text": "Antalya'yı 1361'de ele geçiren kimdir?",
+    "options": [
+     "Kıbrıs Kralı",
+     "Venedik Dükü",
+     "Bizans İmparatoru"
+    ],
+    "answer": 0,
+    "source": "Çimrin: \"1361 yılında Kıbrıs Kralı Pierre I.\""
+   },
+   "orta": {
+    "text": "Efsaneye göre Mehmet Bey hangi kapının girişindeki zinciri kırmıştır?",
+    "options": [
+     "Hadrian Kapısı",
+     "Saat Kulesi kapısı",
+     "Yenikapı"
+    ],
+    "answer": 0,
+    "source": "Çimrin'in aktardığı efsane. Not: bazı kaynaklara göre zincir liman girişine gerilmişti."
+   },
+   "zor": {
+    "text": "Mehmet Bey Antalya'yı geri almak için kaç yıl Korkuteli'nde hazırlandı?",
+    "options": [
+     "12",
+     "3",
+     "40"
+    ],
+    "answer": 0,
+    "source": "Çimrin: \"12 senelik bir süre boyunca Korkuteli'ne çekilerek\"."
    }
   }
  }

@@ -11,10 +11,15 @@ export const CONFIG = {
   DETOUR: 1.3,            // kuş uçuşu mesafeyi sokak mesafesine çeviren katsayı
   TIME_OPTIONS: [30, 45, 60, 90, 120, 180],
 
-  // Rota başlangıcı: katılımcı Kaleiçi'ne yakınsa kendi konumu, değilse bu nokta.
+  // Rota başlangıcı: katılımcı Kaleiçi'nin içindeyse (bir durağa bu mesafeden yakınsa) kendi konumu,
+  // değilse DEFAULT_START. Test modunda her zaman DEFAULT_START.
   DEFAULT_START: { lat: 36.885341, lon: 30.708581, name: 'Hadrianus Kapısı' },
-  KALEICI_CENTER: { lat: 36.8848, lon: 30.7056 },
-  START_RADIUS_M: 1500,
+  START_RADIUS_M: 400,
+  // İlgi alanı kartlarının fotoğrafları (ör. 'img/kategori/tarih.jpg'). Boşsa renkli kart gösterilir.
+  CATEGORY_IMAGES: { sanat: '', tarih: '', kultur: '', eglence: '', gastronomi: '' },
+  // B ve C gruplarında sıradaki durağı kullanıcı mı seçsin (true) yoksa uygulama sırayla mı göstersin (false)?
+  USER_PICKS_NEXT: true,
+
   MAP_CENTER: [36.8848, 30.7056],
   MAP_ZOOM: 17,
 };
