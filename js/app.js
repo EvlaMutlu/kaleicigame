@@ -2,7 +2,7 @@ import { CONFIG } from './config.js';
 import { CATEGORIES, haversineM, recommendRoute, orderStops, routeTime, rankByInterest } from './route.js';
 import { log, setContext, downloadCsv, pendingCount, flush } from './logger.js';
 import { BADGES, newlyEarned, recommendations } from './badges.js';
-import { ICON } from './icons.js';
+import { ICON, LOGO } from './icons.js';
 
 const $ = sel => document.querySelector(sel);
 const $$ = sel => [...document.querySelectorAll(sel)];
@@ -48,7 +48,7 @@ function shell(inner, { nav = true, active = '' } = {}) {
   return `
   <header class="topbar">
     <button class="tb-btn" id="menuBtn" aria-label="Menü">${ICON.menu}</button>
-    <span class="tb-title">Kaleiçi Keşif</span>
+    <span class="tb-title">Kaleiçi Kaşifi</span>
     <button class="tb-btn" id="userBtn" aria-label="Katılımcı">${ICON.user}</button>
   </header>
   <main class="page">${inner}</main>
@@ -84,7 +84,7 @@ function openMenu() {
 function welcome() {
   app.innerHTML = `
   <section class="hero">
-    <div class="hero-band"><div class="logo">K</div><h1>Kaleiçi Keşif</h1><p>Antalya Kaleiçi kültürel miras rotası</p></div>
+    <div class="hero-band">${CONFIG.MASCOT_IMG ? `<img class="mascot" src="${CONFIG.MASCOT_IMG}" alt="">` : ''}<div class="logo">${LOGO}</div><h1>Kaleiçi Kaşifi</h1><p>Antalya Kaleiçi kültürel miras rotası</p></div>
     <div class="hero-body">
       <p class="eyebrow">Hoş geldin</p>
       <h2 class="q-title">Katılımcı kodunu gir</h2>
@@ -110,7 +110,6 @@ function consent() {
     <p class="eyebrow">Bilgilendirme</p>
     <h2 class="q-title">Bilgilendirme ve onam</h2>
     <div class="paper prose">
-      <p><b>[Etik kurul onaylı onam metni buraya gelecek.]</b></p>
       <p>Bu uygulama, Antalya Bilim Üniversitesi tarafından yürütülen bir araştırmanın parçasıdır. Tur sırasında uygulamadaki seçimleriniz, ziyaret ettiğiniz duraklar ve konumunuza bağlı varış bilgileri kişisel bilgileriniz olmadan, yalnızca katılımcı kodunuzla kaydedilir.</p>
       <p>Katılım gönüllüdür; istediğiniz anda gerekçe göstermeden ayrılabilirsiniz.</p>
     </div>

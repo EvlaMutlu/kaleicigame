@@ -17,6 +17,8 @@ export const CONFIG = {
   START_RADIUS_M: 400,
   // İlgi alanı kartlarının fotoğrafları (ör. 'img/kategori/tarih.jpg'). Boşsa renkli kart gösterilir.
   CATEGORY_IMAGES: { sanat: '', tarih: '', kultur: '', eglence: '', gastronomi: '' },
+  // Açılış ekranındaki oyun figürü (ör. 'img/maskot.png'). Boşsa sadece logo görünür.
+  MASCOT_IMG: '',
   // B ve C gruplarında sıradaki durağı kullanıcı mı seçsin (true) yoksa uygulama sırayla mı göstersin (false)?
   USER_PICKS_NEXT: true,
 

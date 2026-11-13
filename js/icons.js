@@ -27,7 +27,23 @@ export const ICON = {
   slope: s('<path d="M2 19h20M2 19L22 9"/><circle cx="9" cy="12" r="2" fill="currentColor"/>'),
   stairs: s('<path d="M2 20h5v-4h5v-4h5V8h5"/><circle cx="9" cy="8" r="2" fill="currentColor"/>'),
   // soru zorluğu
-  q1: s('<circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.5"/>'),
-  q2: s('<circle cx="12" cy="12" r="9"/><path d="M9 9.5a3 3 0 1 1 3.5 3c-.4.1-.5.4-.5.8V15M12 18v.5"/>'),
-  q3: s('<path d="M12 2l3 7 7 .5-5.5 4.5 2 7L12 17l-6.5 4 2-7L2 9.5 9 9z"/>'),
+  q1: s('<rect x="3" y="14" width="4" height="7" rx="1" fill="currentColor"/><rect x="10" y="9" width="4" height="12" rx="1" fill="currentColor" stroke="none" opacity=".22"/><rect x="17" y="4" width="4" height="17" rx="1" fill="currentColor" stroke="none" opacity=".22"/>'),
+  q2: s('<rect x="3" y="14" width="4" height="7" rx="1" fill="currentColor"/><rect x="10" y="9" width="4" height="12" rx="1" fill="currentColor"/><rect x="17" y="4" width="4" height="17" rx="1" fill="currentColor" stroke="none" opacity=".22"/>'),
+  q3: s('<rect x="3" y="14" width="4" height="7" rx="1" fill="currentColor"/><rect x="10" y="9" width="4" height="12" rx="1" fill="currentColor"/><rect x="17" y="4" width="4" height="17" rx="1" fill="currentColor"/>'),
 };
+
+// Oyun logosu: Hadrianus Kapısı'nın üç kemeri + pusula yıldızı (özgün çizim)
+export const LOGO = `<svg class="logo-svg" viewBox="0 0 120 120" aria-label="Kaleiçi Kaşifi logosu">
+  <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c8a3e"/><stop offset="1" stop-color="#0d5aa7"/></linearGradient></defs>
+  <circle cx="60" cy="60" r="56" fill="#fff"/>
+  <circle cx="60" cy="60" r="50" fill="none" stroke="url(#lg)" stroke-width="4"/>
+  <path d="M60 14l5 13-5-3-5 3z" fill="#f6c21c" stroke="#c99a00" stroke-width="1" stroke-linejoin="round"/>
+  <rect x="22" y="44" width="76" height="8" rx="2" fill="url(#lg)"/>
+  <rect x="26" y="38" width="8" height="8" rx="1" fill="url(#lg)"/>
+  <rect x="86" y="38" width="8" height="8" rx="1" fill="url(#lg)"/>
+  <path fill="url(#lg)" fill-rule="evenodd" d="M24 54h72v38H24z
+    M30 92V74a7 7 0 0 1 14 0v18z
+    M51 92V70a9 9 0 0 1 18 0v22z
+    M76 92V74a7 7 0 0 1 14 0v18z"/>
+  <path d="M18 96h84" stroke="#f6c21c" stroke-width="4" stroke-linecap="round"/>
+</svg>`;

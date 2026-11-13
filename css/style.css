@@ -1,4 +1,4 @@
-/* Kaleiçi Keşif – Canva tasarımına göre: yeşil→mavi gradyan, bej seçim kartları, sarı vurgu, açık mavi durak kartları */
+/* Kaleiçi Kaşifi – Canva tasarımına göre: yeşil→mavi gradyan, bej seçim kartları, sarı vurgu, açık mavi durak kartları */
 :root {
   --green: #0c8a3e; --blue: #0d5aa7; --grad: linear-gradient(90deg, var(--green), var(--blue));
   --ink: #1f2328; --muted: #6b7178; --line: #e3e6ea; --bg: #ffffff;
@@ -48,7 +48,10 @@ svg { width: 1em; height: 1em; display: block; }
 .hero-band { background: var(--grad); color: #fff; padding: calc(48px + env(safe-area-inset-top)) 24px 36px; text-align: center; }
 .hero-band h1 { margin: 10px 0 4px; font-weight: 400; font-size: 2rem; }
 .hero-band p { margin: 0; opacity: .85; }
-.logo { width: 70px; height: 70px; border-radius: 50%; margin: 0 auto; background: #fff; color: var(--green); font: 700 2.2rem/70px Georgia, serif; box-shadow: 0 0 0 6px rgb(255 255 255 / .25); }
+.logo { width: 112px; height: 112px; margin: 0 auto; border-radius: 50%; box-shadow: 0 0 0 6px rgb(255 255 255 / .25), 0 8px 20px rgb(0 0 0 / .18); }
+.logo-svg { width: 100%; height: 100%; display: block; }
+.mascot { display: block; max-height: 160px; max-width: 70%; margin: 0 auto 12px; }
+.hero-band h1 { font-weight: 700; letter-spacing: .5px; }
 .hero-body { max-width: 520px; width: 100%; margin: 0 auto; padding: 26px 22px; display: flex; flex-direction: column; gap: 14px; }
 
 /* adım göstergesi ve oklar */

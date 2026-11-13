@@ -1,4 +1,4 @@
-# Kaleiçi Keşif – araştırma uygulaması (ilk sürüm)
+# Kaleiçi Kaşifi – araştırma uygulaması (ilk sürüm)
 
 Telefon tarayıcısında çalışan HTML uygulaması. Bir sonraki adımda aynı kod Android uygulamasına (APK) dönüştürülecek.
 
@@ -35,7 +35,7 @@ Adresin sonuna `?test=1` ekleyin: `https://…/kaleici-kesif/?test=1`
 
 ## 3. Google E-Tablolar bağlantısı
 
-1. Google Drive'da yeni bir E-Tablo açın (ör. "Kaleiçi Keşif Verileri").
+1. Google Drive'da yeni bir E-Tablo açın (ör. "Kaleiçi Kaşifi Verileri").
 2. Menüden **Uzantılar → Apps Script**. Açılan sayfadaki kodu silin, `apps-script/Code.gs` içeriğini yapıştırın, kaydedin.
 3. **Dağıt → Yeni dağıtım → Tür: Web uygulaması**
    - Şu kullanıcı olarak çalıştır: **Ben**
