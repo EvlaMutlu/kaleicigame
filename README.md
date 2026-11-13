@@ -113,7 +113,7 @@ Hangi özelliğin hangi grupta açık olduğu `js/config.js` içindeki `QUESTION
 | Özellik | A | B | C |
 |---|:-:|:-:|:-:|
 | Tercih soruları, kişisel rota, benzerlik % | – | ✓ | ✓ |
-| Durak soruları + soru zorluğu seçimi | – | ✓ | ✓ |
+| Durak soruları + soru zorluğu seçimi | – | – | ✓ |
 | Profil: takma ad + avatar | – | ✓ | ✓ |
 | Haritaya yeni yer öner | – | ✓ | ✓ |
 | Rozetler + rozet önerisi | – | – | ✓ |

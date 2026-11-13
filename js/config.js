@@ -20,7 +20,7 @@ export const CONFIG = {
   // Açılış ekranındaki oyun figürü (ör. 'img/maskot.png'). Boşsa sadece logo görünür.
   MASCOT_IMG: '',
   // Hangi özellik hangi grupta? (A: bilgi rehberi, B: kişisel rota, C: kişisel + oyunlaştırma)
-  QUESTION_GROUPS: ['B', 'C'],  // durak soruları + soru zorluğu seçimi
+  QUESTION_GROUPS: ['C'],       // durak soruları + soru zorluğu seçimi (girişte ve tur sırasında)
   AVATAR_GROUPS: ['B', 'C'],    // profil: takma ad + avatar
   SUGGEST_GROUPS: ['B', 'C'],   // haritaya yeni yer önerme
   JOURNAL_GROUPS: ['C'],        // ziyaret günlüğü + motivasyon mesajları (rozetler de yalnız C)
