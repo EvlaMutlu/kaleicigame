@@ -45,7 +45,6 @@ function render() {
 
 // ---------- ortak iskelet: gradyan üst bar + alt menü ----------
 function shell(inner, { nav = true, active = '' } = {}) {
-  const C = st.group === 'C';
   return `
   <header class="topbar">
     <button class="tb-btn" id="menuBtn" aria-label="Menü">${ICON.menu}</button>
@@ -64,10 +63,13 @@ function wireShell() {
   $('#userBtn').onclick = () => (avatarOn() ? profileSheet() : modal(`<p class="eyebrow">Katılımcı</p><h2>${esc(st.code || 'Giriş yapılmadı')}</h2><p class="muted">Sorun yaşarsanız bu kodu araştırmacıya söyleyin.</p><button class="btn ghost" data-close>Kapat</button>`));
   const l = $('#nbList'); if (l) l.onclick = () => { st.view = 'list'; save(); tour(); };
   const p = $('#nbPlay'); if (p) p.onclick = () => { st.view = 'map'; save(); tour(); };
+  const mv = $('#motiv'); if (mv) mv.onclick = showJournal;
   const a = $('#nbAdd'); if (a && st.group !== 'A') a.onclick = addChooser;
 }
 // ---------- profil: takma ad + avatar ----------
-const avatarOn = () => (CONFIG.AVATAR_GROUPS || []).includes(st.group) && !!st.code;
+const inG = k => (CONFIG[k] || []).includes(st.group);
+const hasQ = () => inG('QUESTION_GROUPS');
+const avatarOn = () => inG('AVATAR_GROUPS') && !!st.code;
 const myAvatar = () => (avatarOn() ? avatarById(st.avatar) : null);
 function profileSheet() {
   let pick = st.avatar || '';
@@ -91,15 +93,16 @@ function profileSheet() {
 function openMenu() {
   const inTour = st.phase === 'tour';
   modal(`<p class="eyebrow">Menü</p>
-    ${inTour && st.group === 'C' ? `<button class="menu-item" data-m="level">Soru zorluğu: <b>${levelLabel(st.qLevel)}</b></button>` : ''}
+    ${inTour && hasQ() ? `<button class="menu-item" data-m="level">Soru zorluğu: <b>${levelLabel(st.qLevel)}</b></button>` : ''}
     ${inTour ? `<button class="menu-item" data-m="view">${st.view === 'map' ? 'Listeye dön' : 'Haritayı göster'}</button><button class="menu-item" data-m="finish">Turu bitir</button>` : ''}
     ${st.group === 'C' ? '<button class="menu-item" data-m="badges">Rozetlerim</button>' : ''}
+    ${inG('JOURNAL_GROUPS') && st.code ? '<button class="menu-item" data-m="journal">Ziyaret günlüğüm</button>' : ''}
     <button class="menu-item" data-m="guide">Rehberim</button>
-    ${st.code ? '<button class="menu-item" data-m="suggest">Haritaya yeni yer öner</button>' : ''}
+    ${st.code && inG('SUGGEST_GROUPS') ? '<button class="menu-item" data-m="suggest">Haritaya yeni yer öner</button>' : ''}
     <button class="btn ghost" data-close>Kapat</button>`);
   $$('[data-m]').forEach(b => b.onclick = () => {
     const m = b.dataset.m; closeModal(true);
-    if (m === 'level') levelPicker(); if (m === 'finish') finishTour(); if (m === 'guide') showGuide(); if (m === 'badges') showBadges(); if (m === 'suggest') suggestPlace();
+    if (m === 'level') levelPicker(); if (m === 'finish') finishTour(); if (m === 'guide') showGuide(); if (m === 'badges') showBadges(); if (m === 'suggest') suggestPlace(); if (m === 'journal') showJournal();
     if (m === 'view') { st.view = st.view === 'map' ? 'list' : 'map'; save(); tour(); }
   });
 }
@@ -145,10 +148,10 @@ function consent() {
 }
 
 // ---------- 3. adım adım tercihler (B, C) ----------
-const steps = () => ['interests', 'pace', 'minutes', 'routeDifficulty', ...(st.group === 'C' ? ['qLevel'] : [])];
+const steps = () => ['interests', 'pace', 'minutes', 'routeDifficulty', ...(hasQ() ? ['qLevel'] : [])];
 
 function onboarding() {
-  st.draft = st.draft || { interests: Object.fromEntries(CATEGORIES.map(c => [c, 0])), pace: null, minutes: null, routeDifficulty: null, qLevel: st.group === 'C' ? null : undefined };
+  st.draft = st.draft || { interests: Object.fromEntries(CATEGORIES.map(c => [c, 0])), pace: null, minutes: null, routeDifficulty: null, qLevel: hasQ() ? null : undefined };
   const list = steps(), key = list[st.obStep], d = st.draft;
   const dots = `<div class="dots">${list.map((_, i) => `<i class="${i === st.obStep ? 'on' : i < st.obStep ? 'done' : ''}"></i>`).join('')}</div>`;
   const cards = (opts, val) => `<div class="choice-grid">${opts.map(o => `<button class="choice ${String(o.v) === String(val) ? 'on' : ''}" data-v="${o.v}">${o.icon || ''}<b>${o.label}</b>${o.sub ? `<small>${o.sub}</small>` : ''}</button>`).join('')}</div>`;
@@ -194,8 +197,8 @@ function onboarding() {
   $('#next').onclick = async () => {
     if (st.obStep < list.length - 1) { st.obStep++; save(); onboarding(); return; }
     st.profile = { minutes: d.minutes, pace: d.pace, routeDifficulty: d.routeDifficulty, interests: { ...d.interests } };
-    if (st.group === 'C') st.qLevel = d.qLevel;
-    log('profil', '', { ...st.profile, qLevel: st.group === 'C' ? st.qLevel : null });
+    if (hasQ()) st.qLevel = d.qLevel;
+    log('profil', '', { ...st.profile, qLevel: hasQ() ? st.qLevel : null });
     $('#next').classList.add('busy');
     const start = await startPoint();
     const r = recommendRoute(STOPS, st.profile, routeOpts(start));
@@ -297,7 +300,7 @@ function tour() {
     const from = pos || null;
     const list = isA ? [...all].sort((a, b) => from ? haversineM(from, a) - haversineM(from, b) : a.title.localeCompare(b.title, 'tr')) : all;
     app.innerHTML = shell(`${head}
-      ${st.group === 'C' ? recoLine() : ''}
+      ${inG('JOURNAL_GROUPS') ? motivLine() : ''}${st.group === 'C' ? recoLine() : ''}
       <div class="cards">${list.map(s => {
         const v = st.visited.includes(s.id), isT = s.id === st.target;
         return stopCard(s, {
@@ -334,6 +337,62 @@ function wireTargetPanel() {
   const l = $('#toList'); if (l) l.onclick = () => { st.view = 'list'; save(); tour(); };
   const f = $('#finish'); if (f) f.onclick = finishTour;
 }
+// ---------- ziyaret günlüğü (yalnız kendi geçmişiyle karşılaştırma; sıralama yok) ----------
+const JKEY = 'kaleici_gunluk';
+const jAll = () => { try { return JSON.parse(localStorage.getItem(JKEY) || '{}'); } catch { return {}; } };
+const journal = () => jAll()[st.code] || [];
+function journalAdd(stopId) {
+  const all = jAll(); (all[st.code] = all[st.code] || []).push({ ts: new Date().toISOString(), stop: stopId });
+  try { localStorage.setItem(JKEY, JSON.stringify(all)); } catch { }
+}
+const DAY = 864e5;
+function journalStats() {
+  const j = journal(), now = Date.now(), ago = e => now - Date.parse(e.ts);
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  return {
+    total: j.length,
+    today: j.filter(e => Date.parse(e.ts) >= today.getTime()).length,
+    week: j.filter(e => ago(e) < 7 * DAY).length,
+    lastWeek: j.filter(e => ago(e) >= 7 * DAY && ago(e) < 14 * DAY).length,
+    recent: j.filter(e => ago(e) < CONFIG.ACTIVE_WINDOW_MIN * 6e4).length,
+    idleMin: Math.round((now - Math.max(j.length ? Date.parse(j.at(-1).ts) : 0, st.startedAt ? Date.parse(st.startedAt) : 0)) / 6e4),
+  };
+}
+function motivation() {
+  const s = journalStats();
+  if (s.lastWeek && s.week > s.lastWeek) return { k: 'hafta_artti', icon: '🔥', text: `Geçen haftaya göre ${s.week - s.lastWeek} durak daha fazla keşfettin. Bu ara çok aktifsin!` };
+  if (s.recent >= 2) return { k: 'cok_aktif', icon: '🔥', text: `Son ${CONFIG.ACTIVE_WINDOW_MIN} dakikada ${s.recent} durak keşfettin. Çok aktifsin!` };
+  if (st.phase === 'tour' && unvisited().length && s.idleMin >= CONFIG.PASSIVE_MIN) {
+    const n = pos ? [...unvisited()].sort((a, b) => haversineM(pos, a) - haversineM(pos, b))[0] : null;
+    return { k: 'pasif', icon: '🧭', text: `Keşfedilecek yerler seni bekliyor!${n ? ` En yakını ${n.title}, ${fmtDist(haversineM(pos, n))} uzakta.` : ''}` };
+  }
+  if (s.lastWeek && s.week < s.lastWeek) return { k: 'hafta_azaldi', icon: '🧭', text: `Geçen hafta ${s.lastWeek} durak gezmiştin, bu hafta ${s.week}. Keşfedilecek yerler seni bekliyor!` };
+  if (!s.total) return { k: 'baslangic', icon: '🧭', text: 'Keşfedilecek yerler seni bekliyor! İlk hedefini seç.' };
+  return { k: 'devam', icon: '✨', text: `Bugün ${s.today} durak keşfettin. Böyle devam!` };
+}
+function motivLine() {
+  const m = motivation();
+  if (st.lastMotiv !== m.k) { st.lastMotiv = m.k; save(); log('motivasyon', '', { tur: m.k }); }
+  return `<button class="motiv ${m.k}" id="motiv">${m.icon} ${esc(m.text)}</button>`;
+}
+function showJournal() {
+  const s = journalStats(), j = journal();
+  const days = {};
+  [...j].reverse().forEach(e => { const d = new Date(e.ts).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', weekday: 'long' }); (days[d] = days[d] || []).push(e); });
+  const mx = Math.max(s.week, s.lastWeek, 1), m = motivation();
+  modal(`<p class="eyebrow">Ziyaret günlüğüm</p><h2 class="q-title">Keşif geçmişin</h2>
+    <p class="motiv ${m.k}">${m.icon} ${esc(m.text)}</p>
+    <div class="jstats"><div><b>${s.today}</b><small>Bugün</small></div><div><b>${s.week}</b><small>Son 7 gün</small></div><div><b>${s.total}</b><small>Toplam</small></div></div>
+    <div class="wbars">
+      <div><small>Geçen hafta</small><span style="--w:${100 * s.lastWeek / mx}%"></span><b>${s.lastWeek}</b></div>
+      <div><small>Bu hafta</small><span class="now" style="--w:${100 * s.week / mx}%"></span><b>${s.week}</b></div>
+    </div>
+    <p class="hint">Burada yalnızca kendi geçmişin var; başkalarıyla karşılaştırma yapılmaz.</p>
+    ${j.length ? Object.entries(days).map(([d, es]) => `<h3 class="jday">${esc(d)}</h3><ul class="stoplist">${es.map(e => `<li><span>${ICON.check} ${esc(STOP[e.stop]?.title || e.stop)}</span><span class="muted small">${new Date(e.ts).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}</span></li>`).join('')}</ul>`).join('') : '<p class="hint">Henüz kayıt yok. Bir durağa ulaştığında günlüğüne eklenecek.</p>'}
+    <button class="btn ghost" data-close>Kapat</button>`);
+  log('gunluk_acildi', '', { bugun: s.today, hafta: s.week, gecen_hafta: s.lastWeek, toplam: s.total });
+}
+
 function recoLine() {
   const r = recommendations(ctx(), 1)[0];
   return r ? `<p class="reco">${r.icon} Sıradaki rozet önerisi: <b>${esc(r.name)}</b> – ${esc(r.hint)} (${r.now}/${r.goal})</p>` : '';
@@ -390,9 +449,10 @@ function arrive(stop, how) {
   st.visited.push(stop.id); st.arrivals[stop.id] = new Date().toISOString();
   if (st.target === stop.id) st.target = null;
   log('varis', stop.id, { yontem: how, acc: pos?.acc ?? null, sira: st.visited.length });
+  journalAdd(stop.id);
   if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
   save();
-  if (st.group === 'C' && prev && QUESTIONS[prev] && !st.answers[prev]) {
+  if (hasQ() && prev && QUESTIONS[prev] && !st.answers[prev]) {
     st.pendingQuestion = prev; save();
     askQuestion(prev, () => showInfo(stop));
   } else showInfo(stop);
@@ -478,6 +538,7 @@ function addChooser() {
     <button class="pick-card route" id="chRoute"><span class="pc-ic">${ICON.route}</span><span><b>Rotama durak ekle</b><small>Uygulamadaki hazır duraklardan birini kendi rotana ekle.</small></span></button>
     <button class="pick-card suggest" id="chSuggest"><span class="pc-ic">${ICON.camera}</span><span><b>Haritaya yeni yer öner</b><small>Haritada olmayan bir yeri fotoğrafla ve ekibimize bildir. Rotanı değiştirmez.</small></span></button>
     <button class="btn ghost" data-close>Vazgeç</button>`);
+  if (!inG('SUGGEST_GROUPS')) { closeModal(true); addStopSheet(); return; }
   $('#chRoute').onclick = () => { closeModal(true); addStopSheet(); };
   $('#chSuggest').onclick = () => { closeModal(true); suggestPlace(); };
 }
@@ -598,7 +659,7 @@ function finishTour() {
   $('#yes').onclick = () => {
     closeModal(true);
     const done = () => { log('tur_bitti', '', { gezilen: st.visited, rozetler: st.badges, sureDk: st.startedAt ? Math.round((Date.now() - Date.parse(st.startedAt)) / 60000) : null }); stopWatch(); go('end'); };
-    if (st.group === 'C' && last && QUESTIONS[last] && !st.answers[last]) askQuestion(last, done); else done();
+    if (hasQ() && last && QUESTIONS[last] && !st.answers[last]) askQuestion(last, done); else done();
   };
 }
 function stopWatch() { if (watchId != null) navigator.geolocation.clearWatch(watchId); watchId = null; try { wakeLock?.release(); } catch { } wakeLock = null; }

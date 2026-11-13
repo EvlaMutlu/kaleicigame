@@ -60,8 +60,9 @@ Her olay "Olaylar" sayfasına bir satır olarak düşer: zaman, kod, grup, olay,
 | `cevap` | her cevap denemesi (C) | seviye, seçenek, doğru mu, kaçıncı deneme, saniye |
 | `soru_zorlugu_degisti` | (C) | eski, yeni, nereden değiştirildi |
 | `rozet`, `rozetler_acildi` | (C) | rozet adı |
-| `profil_guncellendi` | (C) | seçilen avatar; takma ad girildi mi (ad kaydedilmez) |
-| `yer_onerildi` | tümü | öneri kimliği, yer adı, kategori, fotoğraf sayısı, konumun nasıl alındığı. Önerinin kendisi (bilgi + fotoğraflar) E-Tablodaki **Öneriler** sayfasına, fotoğraflar Drive'da "Kaleiçi Kaşifi – Öneri Fotoğrafları" klasörüne gider. |
+| `profil_guncellendi` | B, C | seçilen avatar; takma ad girildi mi (ad kaydedilmez) |
+| `yer_onerildi` | B, C | öneri kimliği, yer adı, kategori, fotoğraf sayısı, konumun nasıl alındığı. Önerinin kendisi (bilgi + fotoğraflar) E-Tablodaki **Öneriler** sayfasına, fotoğraflar Drive'da "Kaleiçi Kaşifi – Öneri Fotoğrafları" klasörüne gider. |
+| `motivasyon`, `gunluk_acildi` | C | gösterilen motivasyon mesajının türü (hafta_artti, cok_aktif, pasif, hafta_azaldi, baslangic, devam); günlük açıldığında bugün / son 7 gün / geçen hafta / toplam |
 | `durak_listesi_acildi`, `durak_secildi` | (A) | |
 | `konum_hatasi` | konum izni yok vb. | hata kodu |
 
@@ -104,3 +105,16 @@ C grubunda soru, bir sonraki durağa varıldığında **bir önceki durak hakkı
 - Tarayıcı sürümünde konum **yalnızca ekran açıkken** izlenir. Ekranın kapanmaması istenir, ama bazı telefonlar buna izin vermez. Arka planda takip APK aşamasında eklenecek.
 - Harita karoları internetten (OpenStreetMap) gelir. İnternet yoksa harita boş görünür, ama tur ve kayıt çalışmaya devam eder.
 - Onam metni yer tutucudur (`js/app.js` → `consent`). Etik kurul onaylı metinle değiştirilecek.
+
+## Gruplara göre özellikler
+
+Hangi özelliğin hangi grupta açık olduğu `js/config.js` içindeki `QUESTION_GROUPS`, `AVATAR_GROUPS`, `SUGGEST_GROUPS`, `JOURNAL_GROUPS` ayarlarıyla belirlenir. Rozetler yalnız C grubundadır.
+
+| Özellik | A | B | C |
+|---|:-:|:-:|:-:|
+| Tercih soruları, kişisel rota, benzerlik % | – | ✓ | ✓ |
+| Durak soruları + soru zorluğu seçimi | – | ✓ | ✓ |
+| Profil: takma ad + avatar | – | ✓ | ✓ |
+| Haritaya yeni yer öner | – | ✓ | ✓ |
+| Rozetler + rozet önerisi | – | – | ✓ |
+| Ziyaret günlüğü + motivasyon mesajları | – | – | ✓ |

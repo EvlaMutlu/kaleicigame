@@ -19,8 +19,13 @@ export const CONFIG = {
   CATEGORY_IMAGES: { sanat: '', tarih: '', kultur: '', eglence: '', gastronomi: '' },
   // Açılış ekranındaki oyun figürü (ör. 'img/maskot.png'). Boşsa sadece logo görünür.
   MASCOT_IMG: '',
-  // Profil (takma ad + avatar) hangi gruplarda açık? Oyunlaştırma öğesi olduğu için yalnız C.
-  AVATAR_GROUPS: ['C'],
+  // Hangi özellik hangi grupta? (A: bilgi rehberi, B: kişisel rota, C: kişisel + oyunlaştırma)
+  QUESTION_GROUPS: ['B', 'C'],  // durak soruları + soru zorluğu seçimi
+  AVATAR_GROUPS: ['B', 'C'],    // profil: takma ad + avatar
+  SUGGEST_GROUPS: ['B', 'C'],   // haritaya yeni yer önerme
+  JOURNAL_GROUPS: ['C'],        // ziyaret günlüğü + motivasyon mesajları (rozetler de yalnız C)
+  ACTIVE_WINDOW_MIN: 30,        // "çok aktifsin": bu süre içinde en az 2 durak
+  PASSIVE_MIN: 20,              // "keşfedilecek yerler seni bekliyor": bu süredir yeni durak yoksa
   // B ve C gruplarında sıradaki durağı kullanıcı mı seçsin (true) yoksa uygulama sırayla mı göstersin (false)?
   USER_PICKS_NEXT: true,
 

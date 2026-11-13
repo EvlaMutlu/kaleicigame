@@ -192,3 +192,16 @@ details.add li, .stoplist li { display: flex; justify-content: space-between; al
 .file-btn { display: flex; gap: 8px; justify-content: center; align-items: center; cursor: pointer; }
 .file-btn svg { width: 20px; height: 20px; }
 .mini-map { flex: none; height: 220px; min-height: 220px; border-radius: 12px; border: 2px solid var(--line); }
+
+/* ziyaret günlüğü + motivasyon */
+.motiv { display: block; width: 100%; text-align: left; border: 0; border-radius: 14px; padding: 11px 14px; margin: 0; font: inherit; font-weight: 600; font-size: .92rem; line-height: 1.35; background: #fff3c4; color: #5a4300; }
+.motiv.cok_aktif, .motiv.hafta_artti { background: #ffe1cc; color: #7a2e00; }
+.motiv.devam { background: #dff3e6; color: #0b5a2a; }
+.jstats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.jstats div { background: var(--card); border-radius: 12px; padding: 10px; text-align: center; }
+.jstats b { display: block; font-size: 1.6rem; color: var(--card-dark); } .jstats small { font-size: .8rem; }
+.wbars div { display: grid; grid-template-columns: 84px 1fr 28px; align-items: center; gap: 8px; margin: 4px 0; }
+.wbars span { height: 14px; border-radius: 7px; background: linear-gradient(90deg, #c9c2b6 var(--w), #eee var(--w)); }
+.wbars span.now { background: linear-gradient(90deg, var(--yellow) var(--w), #eee var(--w)); }
+.wbars b { text-align: right; } .wbars small { font-size: .82rem; }
+.jday { font-size: .95rem; margin: 6px 0 -4px; color: var(--green); }
