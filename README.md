@@ -60,6 +60,7 @@ Her olay "Olaylar" sayfasına bir satır olarak düşer: zaman, kod, grup, olay,
 | `cevap` | her cevap denemesi (C) | seviye, seçenek, doğru mu, kaçıncı deneme, saniye |
 | `soru_zorlugu_degisti` | (C) | eski, yeni, nereden değiştirildi |
 | `rozet`, `rozetler_acildi` | (C) | rozet adı |
+| `profil_guncellendi` | (C) | seçilen avatar; takma ad girildi mi (ad kaydedilmez) |
 | `durak_listesi_acildi`, `durak_secildi` | (A) | |
 | `konum_hatasi` | konum izni yok vb. | hata kodu |
 

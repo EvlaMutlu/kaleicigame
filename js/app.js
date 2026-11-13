@@ -3,6 +3,7 @@ import { CATEGORIES, haversineM, recommendRoute, orderStops, routeTime, rankByIn
 import { log, setContext, downloadCsv, pendingCount, flush } from './logger.js';
 import { BADGES, newlyEarned, recommendations } from './badges.js';
 import { ICON, LOGO } from './icons.js';
+import { AVATARS, avatarById } from './avatars.js';
 
 const $ = sel => document.querySelector(sel);
 const $$ = sel => [...document.querySelectorAll(sel)];
@@ -49,7 +50,7 @@ function shell(inner, { nav = true, active = '' } = {}) {
   <header class="topbar">
     <button class="tb-btn" id="menuBtn" aria-label="Menü">${ICON.menu}</button>
     <span class="tb-title">Kaleiçi Kaşifi</span>
-    <button class="tb-btn" id="userBtn" aria-label="Katılımcı">${ICON.user}</button>
+    <button class="tb-btn ${myAvatar() ? 'has-av' : ''}" id="userBtn" aria-label="Profil">${myAvatar()?.svg || ICON.user}</button>
   </header>
   <main class="page">${inner}</main>
   ${nav ? `<nav class="bottombar">
@@ -60,11 +61,33 @@ function shell(inner, { nav = true, active = '' } = {}) {
 }
 function wireShell() {
   $('#menuBtn').onclick = openMenu;
-  $('#userBtn').onclick = () => modal(`<p class="eyebrow">Katılımcı</p><h2>${esc(st.code || 'Giriş yapılmadı')}</h2><p class="muted">Sorun yaşarsanız bu kodu araştırmacıya söyleyin.</p><button class="btn ghost" data-close>Kapat</button>`);
+  $('#userBtn').onclick = () => (avatarOn() ? profileSheet() : modal(`<p class="eyebrow">Katılımcı</p><h2>${esc(st.code || 'Giriş yapılmadı')}</h2><p class="muted">Sorun yaşarsanız bu kodu araştırmacıya söyleyin.</p><button class="btn ghost" data-close>Kapat</button>`));
   const l = $('#nbList'); if (l) l.onclick = () => { st.view = 'list'; save(); tour(); };
   const p = $('#nbPlay'); if (p) p.onclick = () => { st.view = 'map'; save(); tour(); };
   const a = $('#nbAdd'); if (a && st.group !== 'A') a.onclick = addStopSheet;
 }
+// ---------- profil: takma ad + avatar ----------
+const avatarOn = () => (CONFIG.AVATAR_GROUPS || []).includes(st.group) && !!st.code;
+const myAvatar = () => (avatarOn() ? avatarById(st.avatar) : null);
+function profileSheet() {
+  let pick = st.avatar || '';
+  modal(`<p class="eyebrow">Profilim</p><h2 class="q-title">Kâşif kimliğin</h2>
+    <label class="small muted" for="nick">Takma ad</label>
+    <input id="nick" class="input" maxlength="20" autocomplete="off" placeholder="ör. Kale Kartalı" value="${esc(st.nick || '')}">
+    <p class="muted small">Lütfen gerçek adınızı yazmayın. Takma ad yalnızca bu telefonda saklanır.</p>
+    <p class="small muted">Avatarını seç</p>
+    <div class="av-grid">${AVATARS.map(a => `<button class="av ${a.id === pick ? 'on' : ''}" data-av="${a.id}" aria-label="${esc(a.name)}">${a.svg}<span>${esc(a.name)}</span></button>`).join('')}</div>
+    <p class="muted small">Avatarlar, Kaleiçi'nin tarihinde adı geçen kişilerden esinlenen temsilî çizimlerdir.</p>
+    <button id="pSave" class="btn primary">Kaydet</button>
+    <p class="muted small center">Katılımcı kodu: ${esc(st.code)}</p>`);
+  $$('[data-av]').forEach(b => b.onclick = () => { pick = b.dataset.av; $$('[data-av]').forEach(x => x.classList.toggle('on', x === b)); });
+  $('#pSave').onclick = () => {
+    const nick = $('#nick').value.trim().slice(0, 20);
+    if (pick !== st.avatar || nick !== (st.nick || '')) log('profil_guncellendi', '', { avatar: pick, takma_ad: !!nick });
+    st.avatar = pick; st.nick = nick; save(); closeModal(true); render();
+  };
+}
+
 function openMenu() {
   const inTour = st.phase === 'tour';
   modal(`<p class="eyebrow">Menü</p>

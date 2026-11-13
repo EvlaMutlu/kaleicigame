@@ -158,3 +158,13 @@ details.add li, .stoplist li { display: flex; justify-content: space-between; al
 .reco-list { padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
 .stoplist { list-style: none; padding: 0; margin: 0; } .stoplist li { cursor: pointer; } .stoplist li span:first-child { display: flex; gap: 6px; align-items: center; }
 .toast { position: fixed; left: 50%; top: calc(70px + env(safe-area-inset-top)); transform: translateX(-50%); background: #1f2328; color: #fff; padding: 12px 16px; z-index: 2000; font-weight: 700; text-align: center; animation: up .25s ease-out; max-width: 90vw; border-left: 6px solid var(--yellow); }
+
+/* profil / avatar */
+.tb-btn.has-av svg { width: 36px; height: 36px; border-radius: 50%; box-shadow: 0 0 0 2px #fff; }
+.av-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 6px 0 4px; }
+.av { background: none; border: 3px solid transparent; border-radius: 14px; padding: 4px 2px; font: inherit; color: inherit; cursor: pointer; }
+.av svg { width: 100%; height: auto; aspect-ratio: 1; display: block; border-radius: 50%; }
+.av span { display: block; font-size: .62rem; line-height: 1.15; margin-top: 3px; }
+.av.on { border-color: var(--yellow); background: #fff8dc; }
+.center { text-align: center; }
+#nick { text-transform: none; letter-spacing: 0; }

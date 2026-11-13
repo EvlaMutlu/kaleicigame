@@ -19,6 +19,8 @@ export const CONFIG = {
   CATEGORY_IMAGES: { sanat: '', tarih: '', kultur: '', eglence: '', gastronomi: '' },
   // Açılış ekranındaki oyun figürü (ör. 'img/maskot.png'). Boşsa sadece logo görünür.
   MASCOT_IMG: '',
+  // Profil (takma ad + avatar) hangi gruplarda açık? Oyunlaştırma öğesi olduğu için yalnız C.
+  AVATAR_GROUPS: ['C'],
   // B ve C gruplarında sıradaki durağı kullanıcı mı seçsin (true) yoksa uygulama sırayla mı göstersin (false)?
   USER_PICKS_NEXT: true,
 
