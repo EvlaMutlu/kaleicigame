@@ -13,6 +13,8 @@ export const ICON = {
   next: s('<path d="M9 5l7 7-7 7"/>'),
   back: s('<path d="M15 5l-7 7 7 7"/>'),
   close: s('<path d="M6 6l12 12M18 6L6 18"/>'),
+  camera: s('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>'),
+  route: s('<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7a3.5 3.5 0 0 0 0-7H9a3.5 3.5 0 0 1 0-7h7"/>'),
   plus: s('<path d="M12 5v14M5 12h14"/>'),
   check: s('<path d="M5 12l5 5 9-10"/>'),
   pin: s('<path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5" fill="currentColor"/>'),

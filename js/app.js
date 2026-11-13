@@ -1,6 +1,6 @@
 import { CONFIG } from './config.js';
 import { CATEGORIES, haversineM, recommendRoute, orderStops, routeTime, rankByInterest } from './route.js';
-import { log, setContext, downloadCsv, pendingCount, flush } from './logger.js';
+import { log, setContext, downloadCsv, pendingCount, flush, queueSuggestion } from './logger.js';
 import { BADGES, newlyEarned, recommendations } from './badges.js';
 import { ICON, LOGO } from './icons.js';
 import { AVATARS, avatarById } from './avatars.js';
@@ -64,7 +64,7 @@ function wireShell() {
   $('#userBtn').onclick = () => (avatarOn() ? profileSheet() : modal(`<p class="eyebrow">Katılımcı</p><h2>${esc(st.code || 'Giriş yapılmadı')}</h2><p class="muted">Sorun yaşarsanız bu kodu araştırmacıya söyleyin.</p><button class="btn ghost" data-close>Kapat</button>`));
   const l = $('#nbList'); if (l) l.onclick = () => { st.view = 'list'; save(); tour(); };
   const p = $('#nbPlay'); if (p) p.onclick = () => { st.view = 'map'; save(); tour(); };
-  const a = $('#nbAdd'); if (a && st.group !== 'A') a.onclick = addStopSheet;
+  const a = $('#nbAdd'); if (a && st.group !== 'A') a.onclick = addChooser;
 }
 // ---------- profil: takma ad + avatar ----------
 const avatarOn = () => (CONFIG.AVATAR_GROUPS || []).includes(st.group) && !!st.code;
@@ -95,10 +95,11 @@ function openMenu() {
     ${inTour ? `<button class="menu-item" data-m="view">${st.view === 'map' ? 'Listeye dön' : 'Haritayı göster'}</button><button class="menu-item" data-m="finish">Turu bitir</button>` : ''}
     ${st.group === 'C' ? '<button class="menu-item" data-m="badges">Rozetlerim</button>' : ''}
     <button class="menu-item" data-m="guide">Rehberim</button>
+    ${st.code ? '<button class="menu-item" data-m="suggest">Haritaya yeni yer öner</button>' : ''}
     <button class="btn ghost" data-close>Kapat</button>`);
   $$('[data-m]').forEach(b => b.onclick = () => {
     const m = b.dataset.m; closeModal(true);
-    if (m === 'level') levelPicker(); if (m === 'finish') finishTour(); if (m === 'guide') showGuide(); if (m === 'badges') showBadges();
+    if (m === 'level') levelPicker(); if (m === 'finish') finishTour(); if (m === 'guide') showGuide(); if (m === 'badges') showBadges(); if (m === 'suggest') suggestPlace();
     if (m === 'view') { st.view = st.view === 'map' ? 'list' : 'map'; save(); tour(); }
   });
 }
@@ -471,10 +472,94 @@ function levelPicker() {
 }
 
 // ---------- turda durak ekleme (B, C) ----------
+// İki ayrı işlev: (1) hazır duraklardan rotaya ekleme, (2) araştırma ekibine yeni yer önerme.
+function addChooser() {
+  modal(`<p class="eyebrow">Ne yapmak istersin?</p>
+    <button class="pick-card route" id="chRoute"><span class="pc-ic">${ICON.route}</span><span><b>Rotama durak ekle</b><small>Uygulamadaki hazır duraklardan birini kendi rotana ekle.</small></span></button>
+    <button class="pick-card suggest" id="chSuggest"><span class="pc-ic">${ICON.camera}</span><span><b>Haritaya yeni yer öner</b><small>Haritada olmayan bir yeri fotoğrafla ve ekibimize bildir. Rotanı değiştirmez.</small></span></button>
+    <button class="btn ghost" data-close>Vazgeç</button>`);
+  $('#chRoute').onclick = () => { closeModal(true); addStopSheet(); };
+  $('#chSuggest').onclick = () => { closeModal(true); suggestPlace(); };
+}
+
+const CAT_LABEL = { gastronomi: 'Restoran / Lezzet', tarih: 'Tarih', kultur: 'Kültür', eglence: 'Eğlence', sanat: 'Sanat' };
+let sMap = null;
+function suggestPlace() {
+  const d = { name: '', cat: '', note: '', photos: [], loc: pos ? { lat: pos.lat, lon: pos.lon, acc: Math.round(pos.acc || 0), how: 'gps' } : null };
+  modal(`<div class="suggest-head">${ICON.camera}<span><b>Haritaya yeni yer öner</b><small>Bu yer rotana eklenmez. Ekibimiz inceler; uygun bulunursa haritaya eklenir.</small></span></div>
+    <label class="lbl" for="sgName">Yerin adı</label>
+    <input id="sgName" class="input plain" maxlength="60" placeholder="ör. Eski çeşme">
+    <span class="lbl">Kategori</span>
+    <div class="chips">${CATEGORIES.map(c => `<button class="chip" data-cat="${c}">${CAT_LABEL[c] || c}</button>`).join('')}</div>
+    <label class="lbl" for="sgNote">Kısa bilgi <small class="muted" id="sgCount">0/300</small></label>
+    <textarea id="sgNote" class="input plain" rows="3" maxlength="300" placeholder="Bu yer hakkında bildiklerin, neden önerdiğin…"></textarea>
+    <span class="lbl">Fotoğraflar <small class="muted">(en fazla 3)</small></span>
+    <div class="photos" id="sgPhotos"></div>
+    <label class="btn ghost file-btn">${ICON.camera} Fotoğraf çek / seç<input id="sgFile" type="file" accept="image/*" multiple hidden></label>
+    <p class="muted small">Lütfen fotoğraflarda insanların yüzü ve araç plakaları görünmesin.</p>
+    <span class="lbl">Konum</span>
+    <p class="muted small" id="sgLocTxt"></p>
+    <div id="sgMap" class="mini-map"></div>
+    <p id="sgErr" class="error" hidden></p>
+    <button id="sgSend" class="btn primary">Öneriyi gönder</button>
+    <button class="btn ghost" data-close>Vazgeç</button>`);
+  const locTxt = () => { $('#sgLocTxt').textContent = d.loc ? (d.loc.how === 'gps' ? 'Bulunduğun konum alındı. Yer başka bir noktadaysa haritada o noktaya dokun.' : 'Haritada işaretlediğin nokta kullanılacak.') : 'Konumun alınamadı. Yerin bulunduğu noktaya haritada dokun.'; };
+  locTxt();
+  // küçük harita: işaretçiyi dokunarak taşı
+  const c = d.loc ? [d.loc.lat, d.loc.lon] : CONFIG.MAP_CENTER;
+  sMap = L.map('sgMap', { zoomControl: false, attributionControl: false }).setView(c, 18);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(sMap);
+  const mk = L.circleMarker(c, { radius: 10, color: '#fff', weight: 3, fillColor: '#f6c21c', fillOpacity: 1 });
+  if (d.loc) mk.addTo(sMap);
+  sMap.on('click', e => { d.loc = { lat: +e.latlng.lat.toFixed(6), lon: +e.latlng.lng.toFixed(6), acc: 0, how: 'harita' }; mk.setLatLng(e.latlng).addTo(sMap); locTxt(); });
+  setTimeout(() => sMap && sMap.invalidateSize(), 250);
+
+  $$('[data-cat]').forEach(b => b.onclick = () => { d.cat = b.dataset.cat; $$('[data-cat]').forEach(x => x.classList.toggle('on', x === b)); });
+  $('#sgNote').oninput = e => { $('#sgCount').textContent = `${e.target.value.length}/300`; };
+  const drawPhotos = () => {
+    $('#sgPhotos').innerHTML = d.photos.map((p, i) => `<span class="ph"><img src="${p}" alt=""><button data-rm="${i}" aria-label="Kaldır">${ICON.close}</button></span>`).join('');
+    $$('[data-rm]').forEach(b => b.onclick = () => { d.photos.splice(+b.dataset.rm, 1); drawPhotos(); });
+    $('.file-btn').style.display = d.photos.length >= 3 ? 'none' : '';
+  };
+  $('#sgFile').onchange = async e => {
+    for (const f of [...e.target.files].slice(0, 3 - d.photos.length)) {
+      try { d.photos.push(await shrinkImage(f)); } catch { /* okunamayan dosya atlanır */ }
+    }
+    e.target.value = ''; drawPhotos();
+  };
+  $('#sgSend').onclick = () => {
+    d.name = $('#sgName').value.trim(); d.note = $('#sgNote').value.trim();
+    const miss = [!d.name && 'yerin adını', !d.cat && 'bir kategori', !d.loc && 'konumu (haritaya dokun)', !d.photos.length && 'en az bir fotoğraf'].filter(Boolean);
+    if (miss.length) { const er = $('#sgErr'); er.hidden = false; er.textContent = `Lütfen ${miss.join(', ')} ekle.`; return; }
+    const id = 'Y' + Date.now().toString(36);
+    queueSuggestion({ id, ts: new Date().toISOString(), code: st.code, group: st.group, name: d.name, cat: d.cat, note: d.note, lat: d.loc.lat, lon: d.loc.lon, acc: d.loc.acc, how: d.loc.how, photos: d.photos });
+    log('yer_onerildi', '', { oneri: id, ad: d.name, kategori: d.cat, foto: d.photos.length, konum: d.loc.how });
+    st.suggested = (st.suggested || 0) + 1; save();
+    closeModal(true); sMap = null;
+    toast(`${ICON.check} Teşekkürler! Önerin ekibimize iletildi. Rotan değişmedi.`);
+    render();
+  };
+  onModalClose = () => { sMap = null; };
+}
+// Fotoğrafı telefonda küçült (uzun kenar 1280 px, JPEG): gönderim hızlı olsun.
+function shrinkImage(file, max = 1280) {
+  return new Promise((res, rej) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const k = Math.min(1, max / Math.max(img.width, img.height));
+      const cv = Object.assign(document.createElement('canvas'), { width: Math.round(img.width * k), height: Math.round(img.height * k) });
+      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+      URL.revokeObjectURL(url); res(cv.toDataURL('image/jpeg', 0.8));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); rej(); };
+    img.src = url;
+  });
+}
+
 function addStopSheet() {
   const others = rankByInterest(STOPS.filter(s => !st.route.includes(s.id)), st.profile?.interests || {}).map(r => r.stop);
-  modal(`<p class="eyebrow">Rotana ekle</p><h2 class="q-title">Durak ekle</h2>
-    <p class="hint">İlgi alanına en çok benzeyenler üstte.</p>
+  modal(`<p class="eyebrow">Rotama durak ekle</p><h2 class="q-title">Hazır duraklar</h2>
+    <p class="hint">Bunlar uygulamadaki duraklar; eklediğin durak rotana girer. İlgi alanına en çok benzeyenler üstte.</p>
     <ul class="stoplist">${others.map(s => `<li><span>${esc(s.title)}<small class="muted"> · %${similarity(s)} benzerlik${pos ? ' · ' + fmtDist(haversineM(pos, s)) : ''}${s.difficulty === 'zor' ? ' · yokuşlu' : ''}</small></span><button class="round-add" data-add="${s.id}" aria-label="Ekle">${ICON.plus}</button></li>`).join('')}</ul>
     <button class="btn ghost" data-close>Kapat</button>`);
   $$('[data-add]').forEach(b => b.onclick = () => {

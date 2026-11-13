@@ -61,6 +61,7 @@ Her olay "Olaylar" sayfasına bir satır olarak düşer: zaman, kod, grup, olay,
 | `soru_zorlugu_degisti` | (C) | eski, yeni, nereden değiştirildi |
 | `rozet`, `rozetler_acildi` | (C) | rozet adı |
 | `profil_guncellendi` | (C) | seçilen avatar; takma ad girildi mi (ad kaydedilmez) |
+| `yer_onerildi` | tümü | öneri kimliği, yer adı, kategori, fotoğraf sayısı, konumun nasıl alındığı. Önerinin kendisi (bilgi + fotoğraflar) E-Tablodaki **Öneriler** sayfasına, fotoğraflar Drive'da "Kaleiçi Kaşifi – Öneri Fotoğrafları" klasörüne gider. |
 | `durak_listesi_acildi`, `durak_secildi` | (A) | |
 | `konum_hatasi` | konum izni yok vb. | hata kodu |
 

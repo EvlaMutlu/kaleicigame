@@ -36,6 +36,28 @@ export async function flush() {
   flushing = false;
 }
 
+// Yer önerileri (fotoğraflı) ayrı kuyrukta tutulur ve tek tek gönderilir; olay kaydını şişirmez.
+const SUG = 'kaleici_oneriler';
+export function queueSuggestion(s) {
+  const q = load(SUG); q.push(s); save(SUG, q);
+  if (load(SUG).length !== q.length) { // depolama doluysa fotoğrafsız sakla
+    s.photos = []; s.note += ' [fotoğraf telefonda saklanamadı]'; save(SUG, [...load(SUG), s]);
+  }
+  flushSuggestions();
+}
+let sending = false;
+export async function flushSuggestions() {
+  if (sending || !CONFIG.SHEETS_URL || !navigator.onLine) return;
+  sending = true;
+  try {
+    for (let q = load(SUG); q.length; q = load(SUG)) {
+      await fetch(CONFIG.SHEETS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ type: 'oneri', ...q[0] }) });
+      save(SUG, load(SUG).filter(x => x.id !== q[0].id));
+    }
+  } catch { /* sonra tekrar denenir */ }
+  sending = false;
+}
+
 export const pendingCount = () => load(PENDING).length;
 
 export function downloadCsv() {
@@ -49,5 +71,5 @@ export function downloadCsv() {
   a.click();
 }
 
-window.addEventListener('online', flush);
-setInterval(flush, 15000);
+window.addEventListener('online', () => { flush(); flushSuggestions(); });
+setInterval(() => { flush(); flushSuggestions(); }, 15000);
