@@ -23,7 +23,7 @@ export const CONFIG = {
   QUESTION_GROUPS: ['C'],       // durak soruları + soru zorluğu seçimi (girişte ve tur sırasında)
   AVATAR_GROUPS: ['B', 'C'],    // profil: takma ad + avatar
   AVATAR_MODE: { B: 'photo', C: 'character' }, // B: kendi fotoğrafı (telefonda kalır), C: tarihî karakter avatarları
-  SUGGEST_GROUPS: ['B', 'C'],   // haritaya yeni yer önerme
+  SUGGEST_GROUPS: ['C'],        // haritaya yeni yer önerme (empowerment)
   JOURNAL_GROUPS: ['C'],        // ziyaret günlüğü + motivasyon mesajları (rozetler de yalnız C)
   ACTIVE_WINDOW_MIN: 30,        // "çok aktifsin": bu süre içinde en az 2 durak
   PASSIVE_MIN: 20,              // "keşfedilecek yerler seni bekliyor": bu süredir yeni durak yoksa
