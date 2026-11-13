@@ -161,10 +161,10 @@ details.add li, .stoplist li { display: flex; justify-content: space-between; al
 
 /* profil / avatar */
 .tb-btn.has-av svg { width: 36px; height: 36px; border-radius: 50%; box-shadow: 0 0 0 2px #fff; }
-.av-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 6px 0 4px; }
+.av-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 6px 0 4px; }
 .av { background: none; border: 3px solid transparent; border-radius: 14px; padding: 4px 2px; font: inherit; color: inherit; cursor: pointer; }
-.av svg { width: 100%; height: auto; aspect-ratio: 1; display: block; border-radius: 50%; }
-.av span { display: block; font-size: .62rem; line-height: 1.15; margin-top: 3px; }
+.av svg { width: 78%; margin: 0 auto; height: auto; aspect-ratio: 1; display: block; border-radius: 50%; }
+.av span { display: block; font-size: .7rem; line-height: 1.15; margin-top: 3px; }
 .av.on { border-color: var(--yellow); background: #fff8dc; }
 .center { text-align: center; }
 #nick { text-transform: none; letter-spacing: 0; }

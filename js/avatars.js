@@ -1,4 +1,4 @@
-// Avatarlar: Kaleiçi rehberinde geçen tarihî kişilerden esinlenen özgün, sembolik çizimler (gerçek portre değildir)
+// Avatarlar (Julia Sancta: rehberde Hadrianus Kapısı güney burcunu yaptıran Romalı kadın olarak geçer): Kaleiçi rehberinde geçen tarihî kişilerden esinlenen özgün, sembolik çizimler (gerçek portre değildir)
 // ve iki tarafsız gezgin figürü. Her avatar 100x100 viewBox'ta, yuvarlak.
 
 const SKIN = '#f1c9a5', SKIN2 = '#e0b088', INK = '#3b2a20';
@@ -33,6 +33,16 @@ export const AVATARS = [
       ${face()}${beard('#5a3b25')}
       ${[...Array(6)].map((_, i) => `<ellipse cx="${33 + i * 3.5}" cy="${39 - i * 1.6}" rx="3.6" ry="1.8" transform="rotate(${-35 + i * 6} ${33 + i * 3.5} ${39 - i * 1.6})" fill="#3f8a3a"/>
         <ellipse cx="${67 - i * 3.5}" cy="${39 - i * 1.6}" rx="3.6" ry="1.8" transform="rotate(${35 - i * 6} ${67 - i * 3.5} ${39 - i * 1.6})" fill="#3f8a3a"/>`).join('')}`),
+  },
+  {
+    id: 'julia', name: 'Julia Sancta', note: 'Hadrianus Kapısı güney kulesi',
+    svg: wrap('#f3e6d8', `${body('#c96f3b')}<path d="M18 100c4-16 14-24 24-27l-6 27z" fill="#efe3cf"/>
+      <path d="M44 72l6 6 6-6" fill="#efe3cf"/>
+      <circle cx="50" cy="27" r="9" fill="#4a2d1a"/>
+      <path d="M31 54c-3-18 6-26 19-26s22 8 19 26c-3-8-8-12-19-12s-16 4-19 12z" fill="#4a2d1a"/>
+      ${face({ cy: 52 })}
+      <path d="M33 40q17-9 34 0" stroke="#f6c21c" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <circle cx="33" cy="58" r="2" fill="#f6c21c"/><circle cx="67" cy="58" r="2" fill="#f6c21c"/>`),
   },
   {
     id: 'keyhusrev', name: 'Sultan Gıyaseddin Keyhüsrev', note: '1207, Selçuklu dönemi',
